@@ -6,7 +6,7 @@ import toast from "react-hot-toast";
 import Loader from "../components/Loader";
 
 function Pets() {
-  const [pets, setPets] = useState(null);
+  const [pets, setPets] = useState(null); // começar com null mostra que a requisição ainda não foi feita
 
   function carregarPets() {
     getPets().then((dados) => {
@@ -69,15 +69,15 @@ function Pets() {
                 <td>{pet.nome}</td>
                 <td>{pet.tipo}</td>
                 <td>{pet.porte}</td>
-                <td>{formatarData(pet.dataNasc)}</td>
+                <td>{pet.dataNasc ? formatarData(pet.dataNasc) : 'Não informada'}</td>
                 <td>{pet.cliente.nome}</td>
                 <td>
-                  <Button as={Link} to={`/pets/editar/${pet.id}`} size='sm'>
+                  <Button as={Link} to={`/pets/editar/${pet.id}`} size='sm' className='me-2 mt-2'>
                     Editar
                   </Button>
                   <Button
                     onClick={() => deletarPet(pet.id)}
-                    variant="danger" className="ms-2" size='sm'>
+                    variant="danger" className="me-2 mt-2" size='sm'>
                     Excluir
                   </Button>
                 </td>

@@ -18,7 +18,7 @@ export const Pet = connection.define('pet', {
   },
   dataNasc: {
     type: DataTypes.DATEONLY,
-    allowNull: false,
+    allowNull: true,
   },
 });
 

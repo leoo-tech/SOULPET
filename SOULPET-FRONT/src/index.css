@@ -1,5 +1,11 @@
 @import "bootstrap/dist/css/bootstrap.min.css";
 
+body {
+    font-family: 'Roboto', sans-serif;
+    background-color: #ded7d1;
+    overflow-x: hidden;
+}
+
 .header {
     background-color: #3b2712;
 }

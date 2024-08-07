@@ -41,6 +41,8 @@ petsRouter.post('/pets', async (req, res) => {
   try {
     const { nome, tipo, porte, dataNasc, clienteId } = req.body;
 
+    const dataNascimento = dataNasc || null;
+
     // Verifica se o clienteId foi informado
     if (!clienteId) {
       return res.status(400).json({ message: 'O id do cliente deve ser informado!' });
@@ -53,7 +55,7 @@ petsRouter.post('/pets', async (req, res) => {
     }
 
     // Cria um novo pet
-    const pet = await Pet.create({ nome, tipo, porte, dataNasc, clienteId });
+    const pet = await Pet.create({ nome, tipo, porte, dataNasc: dataNascimento, clienteId });
     res.status(201).json({ message: 'Pet inserido com sucesso!', pet });
 
   } catch (err) {
@@ -65,7 +67,7 @@ petsRouter.post('/pets', async (req, res) => {
     }
 
     // erro genérico
-    res.status(500).json({ message: 'Erro no servidor ao inserir o pet!' });
+    res.status(500).json({ message: 'Erro no servidor ao inserir o pet!', error: err });
   }
 });
 
@@ -99,6 +101,7 @@ petsRouter.put('/pets/:id', async (req, res) => {
   const { nome, tipo, porte, dataNasc, clienteId } = req.body;
 
   try {
+    const dataNascimento = dataNasc || null;
     const petAtualizado = await Pet.findByPk(idPet);
 
     if (petAtualizado) {

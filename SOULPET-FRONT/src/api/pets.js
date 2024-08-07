@@ -22,13 +22,14 @@ export async function addPet(data) {
     const newPet = response.data;
 
     // Retorne o pet criado junto com os detalhes do cliente
-    return { ...newPet, cliente: clienteResponse.data };
+    return { ...newPet, cliente: clienteResponse.data }; // retorna um objeto com o pet e o cliente
   } catch (error) {
     // Lida com erros e retorna uma mensagem adequada
     console.error(error);
     throw error; // Propaga o erro para ser tratado no front-end
   }
 }
+
 // R - read
 export async function getPets() {
   const response = await axios.get(`${API_URL}`);
@@ -47,7 +48,7 @@ export async function getPets() {
 
 export async function getPet(id) {
   const response = await axios.get(`${API_URL}/${id}`);
-  return response.data;
+  return response.data; // objeto do pet
 }
 
 // U - update
@@ -66,5 +67,5 @@ export async function updatePet(id, data) {
 // D - delete
 export async function deletePet(id) {
   const response = await axios.delete(`${API_URL}/${id}`);
-  return response.data;
+  return response.data; // objeto com message
 }

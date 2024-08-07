@@ -28,6 +28,7 @@ function NovoPet() {
 
 
   function adicionarPet(data) {
+    if (data.dataNasc === '') data.dataNasc = null;
     const petData = {
       ...data,
       clienteId: data.cliente,
@@ -90,10 +91,10 @@ function NovoPet() {
             className="form-control"
             {...register("cliente", { required: true })}
           >
-            <option value="">Selecione um dono</option>
+            < option selected disabled>Selecione um dono</option>
             {clientes.map(cliente => (
               <option key={cliente.id} value={cliente.id}>
-                {cliente.nome}
+                {cliente.nome} - {cliente.email}
               </option>
             ))}
           </select>
@@ -107,14 +108,14 @@ function NovoPet() {
             type="date"
             id="dataNasc"
             className="form-control"
-            {...register("dataNasc", { required: true })}
+            {...register("dataNasc")}
           />
           {errors.dataNasc && (
-            <small className="text-danger">A data de nascimento é obrigatória.</small>
+            <small className="text-danger">A data de nascimento é inválida.</small>
           )}
         </div>
         <div>
-          <Button type="submit">Adicionar</Button>
+          <Button className="mt-3" type="submit">Adicionar</Button>
         </div>
       </form>
     </main>
